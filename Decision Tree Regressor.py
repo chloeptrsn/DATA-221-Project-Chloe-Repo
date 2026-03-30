@@ -10,3 +10,11 @@ housing = pd.read_csv("housing.csv")
 # Encoding
 housing = pd.get_dummies(housing)
 housing = housing.dropna()
+
+# Split into feature and target variables
+feature_matrix = housing.drop("median_house_value", axis=10)
+target_values = housing["median_house_value"]
+
+# Train test split-- 70% train, 30% test
+features_train, features_test, labels_train, labels_test = train_test_split(
+    feature_matrix, target_values, test_size=0.3, random_state=42)
