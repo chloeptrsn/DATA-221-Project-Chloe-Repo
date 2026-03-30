@@ -11,6 +11,12 @@ california_house_prices = pd.read_csv("housing.csv")
 # find the median and fill in the missing values
 california_house_prices["total_bedrooms"] = (california_house_prices["total_bedrooms"].fillna(california_house_prices["total_bedrooms"].median()))
 
+#mappping
+ocean_mapping = {"<1H OCEAN": 0, "INLAND": 1,
+    "NEAR OCEAN": 2, "NEAR BAY": 3, "ISLAND": 4}
+
+california_house_prices["ocean_proximity"] = california_house_prices["ocean_proximity"].map(ocean_mapping)
+
 # converting categorical data which is the ocean_proximity column
 california_house_prices = pd.get_dummies(california_house_prices, columns=["ocean_proximity"])
 
