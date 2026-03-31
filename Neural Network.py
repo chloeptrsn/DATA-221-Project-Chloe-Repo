@@ -53,6 +53,7 @@ train_mae = neural_network_model.evaluate(features_train, labels_train)
 rmse = root_mean_squared_error(labels_test, predicted_labels)
 r2 = r2_score(labels_test, predicted_labels)
 
+print("NEURAL NETWORK RESULTS!")
 print(f"Testing Mean Absolute Error: {test_mae}")
 print(f"Training Mean Absolute Error: {train_mae}")
 
