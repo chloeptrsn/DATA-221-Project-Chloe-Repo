@@ -24,3 +24,12 @@ scaling = StandardScaler()
 features_train = scaling.fit_transform(features_train)
 features_test = scaling.transform(features_test)
 
+# Creating model
+decision_tree = DecisionTreeRegressor(random_state=42)
+
+# Train model
+decision_tree.fit(features_train, labels_train)
+
+# Predict
+predicted_labels = decision_tree.predict(features_test)
+
