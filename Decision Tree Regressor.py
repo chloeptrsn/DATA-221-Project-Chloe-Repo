@@ -33,3 +33,8 @@ decision_tree.fit(features_train, labels_train)
 # Predict
 predicted_labels = decision_tree.predict(features_test)
 
+rmse = metrics.mean_squared_error(labels_test, predicted_labels)
+r2 = metrics.r2_score(labels_test, predicted_labels)
+
+print("RMSE:", rmse)
+print("R2:", r2)
