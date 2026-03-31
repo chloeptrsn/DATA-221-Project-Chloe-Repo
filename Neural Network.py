@@ -1,12 +1,8 @@
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
 import tensorflow as tf
-
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, InputLayer
-
 from sklearn.metrics import root_mean_squared_error, r2_score
 
 california_house_prices = pd.read_csv('housing.csv', delimiter=',')
