@@ -1,28 +1,22 @@
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
 import pandas as pd
 
 # Load dataset
-housing = pd.read_csv("housing.csv")
+california_house_prices = pd.read_csv("housing.csv")
 
-# Encoding
-housing = pd.get_dummies(housing)
-housing = housing.dropna()
+# Encoding and preprocessing data
+california_house_prices = pd.get_dummies(california_house_prices)
+california_house_prices = california_house_prices.fillna(california_house_prices.median())
 
 # Split into feature and target variables
-feature_matrix = housing.drop("median_house_value", axis=10)
-target_values = housing["median_house_value"]
+feature_matrix = california_house_prices.drop("median_house_value", axis=1)
+target_values = california_house_prices["median_house_value"]
 
 # Train test split-- 70% train, 30% test
 features_train, features_test, labels_train, labels_test = train_test_split(
     feature_matrix, target_values, test_size=0.3, random_state=42)
-
-# Data scaling
-scaling = StandardScaler()
-features_train = scaling.fit_transform(features_train)
-features_test = scaling.transform(features_test)
 
 # Creating model
 decision_tree = DecisionTreeRegressor(random_state=42)
