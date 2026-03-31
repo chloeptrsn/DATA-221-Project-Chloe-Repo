@@ -11,16 +11,8 @@ california_house_prices = pd.read_csv("C:/Codefile/housing file/housing.csv")
 # fill in the missing values (the missing values are usually present in total_bedrooms)
 california_house_prices["total_bedrooms"] = california_house_prices["total_bedrooms"].fillna(california_house_prices["total_bedrooms"].median())
 
-# mapping (converting categorical to numerical)
-mapping = {
-    "INLAND": 0,
-    "NEAR OCEAN": 1,
-    "NEAR BAY": 2,
-    "ISLAND": 3,
-    "<1H OCEAN": 4
-}
-
-california_house_prices["ocean_proximity"] = california_house_prices["ocean_proximity"].map(mapping)
+# converting categorical to numerical instead of mapping: one-hot encoding
+california_house_prices = pd.get_dummies(california_house_prices, columns=["ocean_proximity"])
 
 # constructing features & target
 features_matrix = california_house_prices.drop("median_house_value", axis = 1)
@@ -56,4 +48,5 @@ for k in k_values:
 results_table = pd.DataFrame(results_list, columns = ["K Values", "MAE", "RMSE", "R2 Score"])
 results_table = results_table.sort_values(by = "RMSE")
 
+print("California House Price Prediction Results")
 print(results_table)
